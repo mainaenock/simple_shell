@@ -1,7 +1,8 @@
 #include "shell.h"
 
 /**
- * main - entry point
+ * str_tok - splits the string
+ * @line: command line
  *
  * Return: always 0
  */
