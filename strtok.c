@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "shell.h"
 
 /**
  * main - entry point
@@ -8,18 +6,31 @@
  * Return: always 0
  */
 
-int main(void)
+char **str_tok(char *line)
 {
-	char str[] = "My name is Enock";
 	char *tok;
-	char *delimiter = " ";
+	char *delimiter = "\n";
+	int i = 0;
+	char **arr;
+	size_t len;
 
-	tok = strtok(str, delimiter);
+	len = strlen(line);
+
+	arr = malloc(len);
+	if (arr == NULL)
+	{
+		perror("error");
+		exit(EXIT_FAILURE);
+	}
+
+	tok = strtok(line, delimiter);
 
 	while (tok != NULL)
 	{
-		printf("%s\n", tok);
+		arr[i] = tok;
 		tok = strtok(NULL, delimiter);
+		i++;
 	}
-	return (0);
+	arr[i] = NULL;
+	return (arr);
 }

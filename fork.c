@@ -1,31 +1,31 @@
-#include <stdio.h>
-#include <unistd.h>
+#include "shell.h"
 
 /**
  * main - fork example
  *
  * Return: Always 0.
  */
-int main(void)
+void fork_fn(char **arr)
 {
-    pid_t my_pid;
-    pid_t child_pid;
+    pid_t child;
+	int status;
 
-    child_pid = fork();
-    if (child_pid == -1)
-    {
-        perror("Error:");
-        return (1);
-    }
-    my_pid = getpid();
-    printf("My pid is %u\n", my_pid);
-    if (child_pid == 0)
-    {
-        printf("(%u) Nooooooooo!\n", my_pid);
-    }
-    else
-    {
-        printf("(%u) %u, I am your father\n", my_pid, child_pid);
-    }
-    return (0);
+
+	child = fork();
+	if (child == -1)
+	{
+		perror("error");
+	}
+	if (child == 0)
+	{
+		if(execve(arr[0], arr, NULL) == -1)
+		{
+			perror("./shell");
+		}
+
+	}
+	else
+	{
+		wait(&status);
+	}
 }

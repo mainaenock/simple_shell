@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "shell.h"
 
 /**
  * main - entry point
@@ -7,23 +6,17 @@
  * Return: always 0
  */
 
-int main(void)
+char * prompt(char *str)
 {
-	char *line = NULL;
 	size_t len = 0;
-	ssize_t read;
+	char *line = NULL;
+	write(1, str, strlen(str));
 
-	printf("$ ");
+	if (getline(&line, &len, stdin) == -1)
+	{
+		perror("error");
+		exit(EXIT_FAILURE);
+	}
+	return (line);
 
-	read = getline(&line, &len, stdin);
-	if (read != -1)
-	{
-		printf("%s",line);
-	}
-	else
-	{
-		printf("error");
-	}
-	free(line);
-	return (0);
 }
