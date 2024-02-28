@@ -10,7 +10,7 @@
 char **str_tok(char *line)
 {
 	char *tok;
-	char *delimiter = "\n";
+	char *delimiter = "\t\n";
 	int i = 0;
 	char **arr;
 	size_t len;
